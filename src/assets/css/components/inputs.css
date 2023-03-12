@@ -1,0 +1,70 @@
+/* Input Styling */
+
+.input-text {
+    display: block;
+    font-size: 1rem;
+    height: 3.429em;
+    padding: 0em 1.14em 0em 2.5em;
+    border-radius: 0.57em;
+    box-sizing: border-box;
+    border-color: rgba(0, 0, 0, 0.4);
+    outline: none;
+}
+
+.input-internals::before {
+    background-image: url(../../font_awesome_icons/Search-Icon.svg);
+    content: "";
+    position: absolute;
+    left: 0.875em;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.1428571429em;
+    height: 1.1428571429em;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.input-wrapper:focus-within::before {
+    filter: invert(43%) sepia(91%) saturate(2500%) hue-rotate(231deg) brightness(100%) contrast(10%);
+}
+
+.xmark {
+    position: absolute;
+    right: 0.875em;
+    top: 33%;
+    width: 1.2857142857em;
+    height: 1.2857142857em;
+}
+
+
+/* .input-wrapper:focus-within::after {
+    background-image: url(../../font_awesome_icons/xmark.svg);
+    content: "";
+    position: absolute;
+    right: 0.875em;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.1428571429em;
+    height: 1.1428571429em;
+    background-size: contain;
+    background-repeat: no-repeat;
+} */
+
+.input-text:active,
+.input-text:focus,
+.input-text:focus-visible {
+    border-width: 0.15em;
+    border-color: #686DE0;
+}
+
+.input-text-error,
+.input-text-error:active,
+.input-text-error:focus,
+.input-text-error:focus-visible {
+    border-width: 0.15em;
+    border-color: #EB4D4B;
+}
+
+.input-text-search-long {
+    width: 24.5em;
+}

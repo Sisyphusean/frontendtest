@@ -1,0 +1,9 @@
+.attribution, .attribution:visited, .attribution a{
+    font-size: 0.8571428571rem;
+    color: rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+}
+
+.error {
+    color: #D20B0B;
+}
