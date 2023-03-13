@@ -10,9 +10,7 @@ interface InputProps {
  * This is an interface that is used to structure the data that is stored in the browser's local storage
  */
 interface userData {
-  data: {
     keywords: string[]
-  }
 }
 
 export {InputProps, userData}

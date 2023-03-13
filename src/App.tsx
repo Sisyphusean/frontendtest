@@ -1,5 +1,6 @@
 //import Pages
 import Home from "./pages/Home";
+import Results from "./pages/Results";
 
 //import CSS assets
 import './App.css';
@@ -16,6 +17,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={ <Home/> } />
+      <Route path="/results" element={ <Results/> } />
     </Routes>
   )
 }
