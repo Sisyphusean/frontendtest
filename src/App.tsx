@@ -13,11 +13,18 @@ import "./assets/css/layout/layout.css"
 //React Router imports
 import { Routes, Route } from "react-router-dom";
 
+//Redux
+import { useSelector } from 'react-redux'
+import { RootState } from "./redux/store";
+
 function App() {
+
+  const routeGuardState = useSelector((state: RootState) => state.routeGuard.searched)
+
   return (
     <Routes>
-      <Route path="/" element={ <Home/> } />
-      <Route path="/results" element={ <Results/> } />
+      <Route path="/" element={<Home />} />
+      <Route path="/results" element={routeGuardState ? <Results /> : <Home />} />
     </Routes>
   )
 }

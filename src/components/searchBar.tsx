@@ -2,7 +2,7 @@
 //Components
 import CustomInput from "./input";
 
-//React Hook
+//React Hook Form
 import { useForm, FormProvider } from "react-hook-form"
 
 //Asset Import
@@ -12,13 +12,32 @@ import { InputProps } from "../interfaces/componentInterfaces";
 
 //API resources
 import { useGithubSearchHook } from "../services/apiHandlers";
+
+//React
 import { useEffect, useState } from "react";
+
+//React Router
+import { useNavigate } from "react-router-dom";
+
+//Redux
+import type { RootState } from '../redux/store'
+import { useSelector, useDispatch } from 'react-redux'
+import { setSearchResults } from "../redux/slices/userDataSlice";
+import { setSearchedGuardToTrue } from "../redux/slices/routeGuard";
 
 function SearchBar() {
     //Create Props to pass to Input Component.
     const customInputProps: InputProps = {
         name: "searchTerms"
     }
+
+    //React Router Navigate
+    const navigate = useNavigate()
+
+    //Gain access to the redux userData and Dispatch hook
+    const { userData } = useSelector((state: RootState) => state.userData)
+    const routeGuardState = useSelector((state: RootState) => state.routeGuard.searched)
+    const dispatch = useDispatch()
 
     //This state is used as a blocker to prevent unending re-renders triggered by changes in the input's value
     const [formSubmitted, setSubmitted] = useState(false)
@@ -37,8 +56,12 @@ function SearchBar() {
     the useGithubSearchHook to prevent unecessary calls to the Hook and in effect Github's API
     */
     useEffect(() => {
-        setSubmitted(false)
-        console.log(`Form submitted is set from ${formSubmitted} to false`)
+        if (formSubmitted) {
+            setSubmitted(false)
+            dispatch(setSearchResults(result))
+            dispatch(setSearchedGuardToTrue())
+            navigate(`/results?keyword=${encodeURI(keyword)}`)
+        }
 
     }, [formSubmitted])
 
