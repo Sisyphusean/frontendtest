@@ -13,12 +13,14 @@ import { userData } from '../interfaces/componentInterfaces';
 import { useEffect } from 'react';
 
 
+let Auth = ""
+
 const axiosinstance = axios.create({
     baseURL: 'https://api.github.com/search/users?q=',
-    headers: {
+    headers: Auth !== "" ? {
         //Enter the token here
-        Authorization: `token ${""}`
-    }
+        Authorization: `token ${Auth}`
+    } : {}
 });
 
 /**
