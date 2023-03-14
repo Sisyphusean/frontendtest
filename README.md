@@ -16,6 +16,7 @@ I used React, Axios, Typescript, React-Router-DOM V6, and Redux. Vanilla CSS was
 ## Setup
 - Download or clone the repository
 - Run `npm install`
+- Enter the specified token in src\services\apiHandlers.ts to prevent rate limiting
 - Run `npm start`
 
 ## Methodology
