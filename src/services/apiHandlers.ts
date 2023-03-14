@@ -16,9 +16,9 @@ import { useEffect } from 'react';
 const axiosinstance = axios.create({
     baseURL: 'https://api.github.com/search/users?q=',
     headers: {
-      Authorization: `token ${"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"}`
+        Authorization: `token ${""}`
     }
-  });
+});
 
 /**
  * This is a custom hook that is used to get the user's Github profile data using SWR
