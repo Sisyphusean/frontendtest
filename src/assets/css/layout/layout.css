@@ -50,3 +50,22 @@ body{
     position: absolute;
     bottom: 10px;
 }
+
+/** NAVBAR LAYOUT **/
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2.2857142857em;
+}
+
+/** RESULTS LAYOUT **/
+.results-container {
+    width:65%;
+    margin: auto;
+}
+
+.results-page {
+    background-color: #ECEEF0;
+    min-height: 100vh;
+}

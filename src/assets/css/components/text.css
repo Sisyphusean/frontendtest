@@ -7,3 +7,9 @@
 .error {
     color: #D20B0B;
 }
+
+.userName {
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+}

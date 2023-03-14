@@ -15,6 +15,10 @@
     gap: 0.5714285714em;
 }
 
+.button-small {
+    height: 2.40em;
+}
+
 .button-image {
     filter: invert(1);
 }

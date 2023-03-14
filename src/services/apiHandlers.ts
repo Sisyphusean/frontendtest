@@ -1,5 +1,6 @@
-//SWR
-import useSWR from 'swr'
+//Axios
+import axios from 'axios';
+
 
 //DOMPurify
 import * as DOMPurify from 'dompurify';
@@ -11,27 +12,13 @@ import { moveStringToBeginning, retrieveData, saveData } from '../utilities/loca
 import { userData } from '../interfaces/componentInterfaces';
 import { useEffect } from 'react';
 
-/**
- * A utility function to fetch data from an API endpoint and return its response as JSON.
- * @async
- * @function fetcher
- * @param {string} url - The URL of the API endpoint to fetch data from.
- * @throws Will throw an error if the HTTP response status is not ok.
- * @returns {Promise<object>} The data returned from the API endpoint as JSON.
- */
-async function fetcher(url: string) {
-    const res = await fetch(url);
 
-    if (!res.ok) {
-        let error: fetcherError = new Error(`HTTP error! Status: ${res.status}`)
-        error.info = await res.json()
-        error.status = res.status
-        throw error
+const axiosinstance = axios.create({
+    baseURL: 'https://api.github.com/search/users?q=',
+    headers: {
+      Authorization: `token ${"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"}`
     }
-
-    const data = await res.json();
-    return data;
-}
+  });
 
 /**
  * This is a custom hook that is used to get the user's Github profile data using SWR
@@ -39,26 +26,14 @@ async function fetcher(url: string) {
  * @param keyword This is the user's search query that would be passed to Github
  * @returns An object with the data, isLoading and error properties
  */
-function GetGithubProfileData(keyword: string | null) {
-        let cleanKeyword = typeof keyword === "string" ? encodeURI(DOMPurify.sanitize(keyword)) : null
-        let fullUrl = endpoints.githubSearch + cleanKeyword
-        const { data, error } = useSWR<GithubSearchResult>(keyword ? fullUrl : null, fetcher)
-        // console.log(error)
+async function GetGithubProfileData(keyword: string | null, page: number = 1) {
+    let cleanKeyword = typeof keyword === "string" ? encodeURI(DOMPurify.sanitize(keyword)) : null;
+    let fullUrl = endpoints.githubSearch + cleanKeyword + `&page=${page}&per_page=20`;
 
-        return {
-            data,
-            isLoading: !error && !data,
-            error: error
-        }
-}
+    try {
+        const response = await axiosinstance.get<GithubSearchResult>(fullUrl)
 
-function useGithubSearchHook(keyword: string | null) {
-
-    let results = GetGithubProfileData(keyword)
-    // console.log(results)
-    useEffect(() => {
-        if (results && keyword ) {
-            console.log(`The current keyword is ${keyword}`)
+        if (response !== null && keyword) {
             const stringCurrentData = retrieveData();
             if (typeof stringCurrentData === "string") {
                 const oldCurrentData: userData = JSON.parse(stringCurrentData);
@@ -71,14 +46,23 @@ function useGithubSearchHook(keyword: string | null) {
                 saveData(currentData);
             }
         }
-    }, [keyword, results]);
 
-    if (results && results.error) {
-        console.error(`There was an ${results?.error}`)
-        return results
+        return {
+            data: response.data,
+            isLoading: false,
+            error: null
+        };
+    } catch (error: any) {
+        console.error(error);
+        return {
+            data: null,
+            isLoading: false,
+            error: error.message || 'An unknown error occurred'
+        };
     }
-    return results
 }
 
 
-export { fetcher, GetGithubProfileData, useGithubSearchHook }
+
+
+export { GetGithubProfileData }

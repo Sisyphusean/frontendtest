@@ -1,8 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { userDataInitialState } from '../../interfaces/reduxInterfaces'
 
+const emptyUserData = {
+    total_count: 0,
+    incomplete_results: false,
+    items: []
+}
+
 const initialState: userDataInitialState = {
-    userData: []
+    userData: emptyUserData
+    
 }
 
 export const userDataSlice = createSlice({
@@ -14,7 +21,7 @@ export const userDataSlice = createSlice({
         },
 
         clearSearchResults: (state) => {
-            state.userData = []
+            state.userData = emptyUserData
         }
     }
 })

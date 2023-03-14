@@ -48,15 +48,13 @@ Finally, it returns the modified array.
 */
 function moveStringToBeginning(stringToCheck: string, arrayToSearch: userData) {
     if (arrayToSearch.keywords.includes(stringToCheck)) {
-        const index = arrayToSearch.keywords.indexOf(stringToCheck);
-        arrayToSearch.keywords.splice(index, 1);
-        arrayToSearch.keywords.unshift(stringToCheck);
+      const index = arrayToSearch.keywords.indexOf(stringToCheck);
+      arrayToSearch.keywords.splice(index, 1);
+      arrayToSearch.keywords.unshift(stringToCheck);
     }
-
     if (!arrayToSearch.keywords.includes(stringToCheck)) {
-        arrayToSearch.keywords.push(stringToCheck)
+      arrayToSearch.keywords.unshift(stringToCheck)
     }
     return arrayToSearch;
-}
-
+  }
 export { saveData, retrieveData, moveStringToBeginning }

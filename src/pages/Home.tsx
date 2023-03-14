@@ -1,11 +1,17 @@
 //Components
 import SearchBar from "../components/searchBar";
 
+//Asset Import
+import largeIcon from "../assets/Icon_Large.svg"
+
 export default function Home() {
 
     return (
         <div className='container'>
-            <SearchBar />
+            <div className="container-search-image">
+                <img alt="site-icon" src={largeIcon} className="logo-large" />
+                <SearchBar value={null}/>
+            </div>
             <div className='attribution-container'>
                 <span className='attribution'>
                     <a

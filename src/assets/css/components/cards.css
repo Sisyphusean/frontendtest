@@ -1,0 +1,95 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.71em 2.33em;
+  gap: 0.25em;
+  min-width: 8.93em;
+  max-width: 11.93em;
+  height: 13.64em;
+  background-color: #fff;
+  border-radius: 0.5em;
+  transition: height 0.3s ease-in-out;
+}
+
+.card:hover {
+  height: auto;
+}
+
+.card-group {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.36rem;
+  padding-top: 2.29em;
+  padding-bottom: 9.16em;
+}
+
+.card-profile-image {
+  width: 5.14em;
+  height: 5.14em;
+  border-radius: 100000em;
+}
+
+/** PAGER **/
+
+.pager-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5em;
+  padding-top: 1.71em;
+  padding-top: 3.25em
+}
+
+.pager-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.29em;
+  width: 2.88em;
+  height: 2.29em;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.pager-number-container{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.71em;
+}
+.pager-number-active{
+  background: #4834D4;
+  color: #fff;
+}
+
+/** JUMPER **/
+.form-jumper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.jumper-input {
+  width: 9.2857142857em;
+  height: 2.29em;
+  border: 1px solid #000;
+  border-radius: 0.5em;
+  text-align: center;
+}
+
+.card:hover .score-visit-links {
+  display: block;
+}
+
+.score-visit-links {
+  display: none;
+}
+
+.profile-link{
+  display: block;
+  margin-top: 0.5em;
+}

@@ -1,9 +1,20 @@
+import { GithubSearchResult } from "./apiInterfaces"
+
 /**
  * This is an interface used to specify the name of the input that is used in the Search Form 
  */
 interface InputProps {
   /**This is the name of the input that is used in the Form */
   name: string
+}
+
+interface searchBarProps {
+  value: string | null
+}
+
+interface cardGroupProps {
+  rawData : {data:GithubSearchResult},
+  keyword: string 
 }
 
 /**
@@ -13,4 +24,4 @@ interface userData {
     keywords: string[]
 }
 
-export {InputProps, userData}
+export {InputProps, userData, searchBarProps, cardGroupProps}
