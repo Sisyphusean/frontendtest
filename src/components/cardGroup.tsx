@@ -92,17 +92,30 @@ function Pager(props: {
 
 function CardGroup(props: any) {
     var keyword = props.keyword
-    let totalNumberOfPages = Math.ceil(props.rawData.rawData.data.total_count / (maxRows * cardsperRow))
+    let totalNumberOfPages = props.rawData.rawData.data ? Math.ceil(props.rawData.rawData.data.total_count / (maxRows * cardsperRow)) : 0
     var cardRows = null
-    var [items, setItems] = useState(props.rawData.rawData.data.items)
+    var [items, setItems] = useState(props.rawData.rawData.data ? props.rawData.rawData.data.items : [])
+    var [isRateLimitingOccurring, setRateLimitingOccuring] = useState(false)
     let [currentPage, setCurrentPage] = useState(1)
     var lastPage = totalNumberOfPages
-    console.log(`The total number of pages ${lastPage}`)
 
     useEffect(() => {
         fetchNewItems(keyword, currentPage).then((result: any) => {
-            setItems(result.data.items)
-            lastPage = Math.ceil(result.data.total_count / (maxRows * cardsperRow))
+            console.log(result.data)
+            if (result.data?.items.length > 0) {
+                setRateLimitingOccuring(false)
+                console.log("Items are being set")
+                setItems(result.data.items)
+                lastPage = Math.ceil(result.data.total_count / (maxRows * cardsperRow))
+            } else {
+                console.log("No items found")
+                setItems([])
+                lastPage = 0
+                if (result.error === "Request failed with status code 403") {
+                    console.log("Rate Limiting is occurring")
+                    setRateLimitingOccuring(true)
+                }
+            }
         })
     },
         [currentPage, keyword])
@@ -165,9 +178,23 @@ function CardGroup(props: any) {
 
     return (
         <div>
-            <Pager currentPage={currentPage} lastPage={lastPage} setCurrentPageHandler={setCurrentPageHandler} />
+            {isRateLimitingOccurring ? "" :<Pager currentPage={currentPage} lastPage={lastPage} setCurrentPageHandler={setCurrentPageHandler} />}
             <div className='card-group'>
-                {lastPage > 0 ? cardRows : <p>No Results Found for {keyword}</p>}
+                {
+                    lastPage > 0 ? cardRows :
+                        (
+                            isRateLimitingOccurring ?
+                                <div className="response-card warning">
+                                    <p>
+                                        Rate Limiting Occurring. You can fix this by adding a Github API key
+                                        to the codebase or by waiting a few minutes.
+                                    </p>
+                                </div>
+                                : <p>
+                                    No Results Found for {keyword}
+                                </p>
+                        )
+                }
             </div>
         </div>
     )
