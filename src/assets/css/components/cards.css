@@ -53,13 +53,14 @@
   border-radius: 4px;
 }
 
-.pager-number-container{
+.pager-number-container {
   display: flex;
   align-items: center;
   flex-direction: row;
   gap: 0.71em;
 }
-.pager-number-active{
+
+.pager-number-active {
   background: #4834D4;
   color: #fff;
 }
@@ -89,7 +90,33 @@
   display: none;
 }
 
-.profile-link{
+.profile-link {
   display: block;
   margin-top: 0.5em;
+}
+
+.response-card {
+  display: flex;
+  align-items: center;
+  width: 32em;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0.5714285714em;
+  margin-top: 1em;
+  padding: 1em;
+  box-sizing: border-box;
+}
+
+.response-card p {
+  width: 95%;
+}
+
+.error {
+  background-color: #fff2f2;
+  border: 0.1071428571em solid #FF7979;
+}
+
+.warning {
+  background-color: #fef4ea;
+  border: 0.1071428571em solid #F0932B;
 }

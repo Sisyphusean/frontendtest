@@ -36,6 +36,12 @@
     height: 1.2857142857em;
 }
 
+.xmark-large {
+    width: 1.4285714286em;
+    height: 1.4285714286em;
+}
+
+
 
 /* .input-wrapper:focus-within::after {
     background-image: url(../../font_awesome_icons/xmark.svg);

@@ -13,15 +13,18 @@ interface searchBarProps {
 }
 
 interface cardGroupProps {
-  rawData : {data:GithubSearchResult},
-  keyword: string 
+  rawData: { data: GithubSearchResult },
+  keyword: string
 }
 
 /**
  * This is an interface that is used to structure the data that is stored in the browser's local storage
  */
 interface userData {
-    keywords: string[]
+  //This is an array of strings that contains the user's search history
+  keywords: string[],
+  //This is a boolean that is used to determine if the user has dismissed the rate limit warning
+  rateLimitDismiss: boolean
 }
 
-export {InputProps, userData, searchBarProps, cardGroupProps}
+export { InputProps, userData, searchBarProps, cardGroupProps }

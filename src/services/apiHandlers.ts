@@ -12,13 +12,12 @@ import { moveStringToBeginning, retrieveData, saveData } from '../utilities/loca
 import { userData } from '../interfaces/componentInterfaces';
 import { useEffect } from 'react';
 
-
-let Auth = ""
+/**This is the Github Authorization code. It should be entered to prevent Rate limiting */
+const Auth: string = ""
 
 const axiosinstance = axios.create({
     baseURL: 'https://api.github.com/search/users?q=',
     headers: Auth !== "" ? {
-        //Enter the token here
         Authorization: `token ${Auth}`
     } : {}
 });
@@ -45,7 +44,7 @@ async function GetGithubProfileData(keyword: string | null, page: number = 1) {
             }
 
             if (stringCurrentData === false) {
-                const currentData: userData = { keywords: [keyword] };
+                const currentData: userData = { keywords: [keyword], rateLimitDismiss: false };
                 saveData(currentData);
             }
         }
@@ -68,4 +67,4 @@ async function GetGithubProfileData(keyword: string | null, page: number = 1) {
 
 
 
-export { GetGithubProfileData }
+export { GetGithubProfileData, Auth }
