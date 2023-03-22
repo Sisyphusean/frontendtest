@@ -17,8 +17,8 @@ function Pager(props: {
 }) {
     const { currentPage, lastPage, setCurrentPageHandler } = props;
 
-    // Limit the lastPage to a maximum of 100
-    const limitedLastPage = Math.min(lastPage, 100);
+    // Limit the lastPage to a maximum of 49
+    const limitedLastPage = Math.min(lastPage, 49);
 
     const getPageNumbers = () => {
         const pageNumbers: number[] = [];
