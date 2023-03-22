@@ -26,6 +26,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/results/:keyword" element={routeGuardState ? <Results /> : <Home />} />
+      <Route path="*" element={<Home />} />
     </Routes>
   )
 }

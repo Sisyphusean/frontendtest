@@ -7,6 +7,7 @@ import { ReactComponent as LeftChevron } from "../assets/font_awesome_icons/Left
 import { ReactComponent as RightChevron } from "../assets/font_awesome_icons/Right-Chevron.svg";
 import { GetGithubProfileData } from '../services/apiHandlers';
 
+
 const maxRows = 5;
 const cardsperRow = 4;
 
@@ -87,36 +88,40 @@ function Pager(props: {
     );
 }
 
-
-
-
-function CardGroup(props: any) {
+export default function Cardgroup(props: any) {
     var keyword = props.keyword
     let totalNumberOfPages = props.rawData.rawData.data ? Math.ceil(props.rawData.rawData.data.total_count / (maxRows * cardsperRow)) : 0
     var cardRows = null
     var [items, setItems] = useState(props.rawData.rawData.data ? props.rawData.rawData.data.items : [])
     var [isRateLimitingOccurring, setRateLimitingOccuring] = useState(false)
     let [currentPage, setCurrentPage] = useState(1)
-    var lastPage = totalNumberOfPages
+    var [lastPage, setLastPage] = useState(totalNumberOfPages)
+    var [isFetching, setIsFetching] = useState(false)
 
     useEffect(() => {
         fetchNewItems(keyword, currentPage).then((result: any) => {
-            console.log(result.data)
+
+            if (result.isLoading) {
+                setIsFetching(true)
+            }
+
+            console.log(result)
+
             if (result.data?.items.length > 0) {
                 setRateLimitingOccuring(false)
                 setItems(result.data.items)
-                lastPage = Math.ceil(result.data.total_count / (maxRows * cardsperRow))
+                setLastPage(Math.ceil(result.data.total_count / (maxRows * cardsperRow)))
             } else {
                 setItems([])
-                lastPage = 0
                 if (result.error === "Request failed with status code 403") {
-                    console.log("Rate Limiting is occurring")
                     setRateLimitingOccuring(true)
+                    setLastPage(0)
+                    setCurrentPage(0)
                 }
             }
         })
     },
-        [currentPage, keyword])
+        [currentPage, keyword, lastPage, isRateLimitingOccurring])
 
     //Get New Items
     const fetchNewItems = async (keyword: string, page: number) => {
@@ -129,8 +134,12 @@ function CardGroup(props: any) {
         if (page > 0 && page <= lastPage) {
             setCurrentPage(page)
             fetchNewItems(keyword, page).then((result: any) => {
-                setItems(result.data.items)
-                lastPage = Math.ceil(result.data.total_count / (maxRows * cardsperRow))
+                if (result.data?.items) {
+                    setItems(result.data.items)
+                } else {
+                    setItems([result.data.items])
+                }
+                setLastPage(Math.ceil(result.data.total_count / (maxRows * cardsperRow)))
             })
             return
         }
@@ -141,7 +150,7 @@ function CardGroup(props: any) {
                 setCurrentPage(currentPage - 1)
                 fetchNewItems(keyword, page).then((result: any) => {
                     setItems(result.data.items)
-                    lastPage = Math.ceil(result.data.total_count / (maxRows * cardsperRow))
+                    setLastPage(Math.ceil(result.data.total_count / (maxRows * cardsperRow)))
                 })
             }
             return
@@ -152,7 +161,7 @@ function CardGroup(props: any) {
                 setCurrentPage(currentPage + 1)
                 fetchNewItems(keyword, page).then((result: any) => {
                     setItems(result.data.items)
-                    lastPage = Math.ceil(result.data.total_count / (maxRows * cardsperRow))
+                    setLastPage(Math.ceil(result.data.total_count / (maxRows * cardsperRow)))
                 })
             }
             return
@@ -176,27 +185,42 @@ function CardGroup(props: any) {
 
     return (
         <div>
-            {isRateLimitingOccurring ? "" : <Pager currentPage={currentPage} lastPage={lastPage} setCurrentPageHandler={setCurrentPageHandler} />}
-            <div className='card-group'>
-                {
-                    lastPage > 0 ? cardRows :
-                        (
-                            isRateLimitingOccurring ?
-                                <div className="response-card warning">
-                                    <p>
-                                        Rate Limiting Occurring. You can fix this by adding a Github API key
-                                        to the codebase or by waiting a few minutes.
-                                    </p>
-                                </div>
-                                : <p>
-                                    No Results Found for {keyword}
+            {isRateLimitingOccurring
+                ? ""
+                :
+                (
+                    lastPage === 0 ?
+                        ""
+                        : <Pager
+                            currentPage={currentPage}
+                            lastPage={lastPage}
+                            setCurrentPageHandler={setCurrentPageHandler} />
+                )
+            }
+            {
+                lastPage > 0 ?
+                    <div className='card-group'>
+                        {cardRows}
+                    </div>
+                    :
+                    (
+                        isRateLimitingOccurring ?
+                            <div className="response-card warning" style={{ marginTop: "10em", flexDirection: "column" }}>
+                                <p style={{ fontSize: "1.2rem", fontWeight: "600", marginBottom: "0" }}>
+                                    Uhoh Rate Limiting is happening
                                 </p>
-                        )
-                }
-            </div>
+                                <p>
+                                    Rate limiting occurs when too many requests are made to an API in a short amount of time. This can
+                                    happen when a large number of requests are sent over a short
+                                    period of time. To prevent this from happening,
+                                    you can add an API key to your code or wait a few minutes before making another request.
+                                </p>
+                            </div>
+                            : <p style={{ marginTop: "4em" }}>
+                                No Results for {keyword}
+                            </p>
+                    )
+            }
         </div>
     )
 }
-
-
-export default CardGroup;

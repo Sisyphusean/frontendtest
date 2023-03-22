@@ -18,12 +18,13 @@ import { retrieveData, saveData } from "../utilities/localData";
 import { userData } from "../interfaces/componentInterfaces";
 
 //React Router
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function Home() {
 
     const [rateLimitDismissed, setRateLimitModalState] = useState(false)
     var rawParams = useParams()
+    const navigate = useNavigate()
 
     /**
      * This function retrieves the user data from local storage and returns it as an object
@@ -49,10 +50,8 @@ export default function Home() {
     }
 
     useEffect(() => {
-        if(rawParams.keyword){
-            let fullUrl = window.location.href
-            let splitUrl = fullUrl.split("/results")
-            window.location.href = splitUrl[0]
+        if (rawParams.keyword) {
+            navigate("/")
         }
 
         const userData = getuserData()

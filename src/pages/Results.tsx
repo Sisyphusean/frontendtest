@@ -2,7 +2,7 @@ import Navbar from "../components/navbar";
 
 //React Router
 import { useParams } from 'react-router-dom';
-import CardGroup from "../components/cardGroup";
+import Cardgroup from "../components/cardGroup";
 
 //Redux
 import { useSelector } from 'react-redux'
@@ -22,7 +22,7 @@ export default function Results() {
         <div className="results-page">
             <div className="results-container">
                 <Navbar value={keyword} />
-                <CardGroup keyword={keyword} rawData={{rawData}} />
+                <Cardgroup keyword={keyword} rawData={{rawData}} />
             </div>
         </div>
     )
