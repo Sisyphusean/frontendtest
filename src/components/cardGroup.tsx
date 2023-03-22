@@ -104,11 +104,9 @@ function CardGroup(props: any) {
             console.log(result.data)
             if (result.data?.items.length > 0) {
                 setRateLimitingOccuring(false)
-                console.log("Items are being set")
                 setItems(result.data.items)
                 lastPage = Math.ceil(result.data.total_count / (maxRows * cardsperRow))
             } else {
-                console.log("No items found")
                 setItems([])
                 lastPage = 0
                 if (result.error === "Request failed with status code 403") {
@@ -178,7 +176,7 @@ function CardGroup(props: any) {
 
     return (
         <div>
-            {isRateLimitingOccurring ? "" :<Pager currentPage={currentPage} lastPage={lastPage} setCurrentPageHandler={setCurrentPageHandler} />}
+            {isRateLimitingOccurring ? "" : <Pager currentPage={currentPage} lastPage={lastPage} setCurrentPageHandler={setCurrentPageHandler} />}
             <div className='card-group'>
                 {
                     lastPage > 0 ? cardRows :

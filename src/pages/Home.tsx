@@ -17,9 +17,13 @@ import { useEffect, useState } from "react";
 import { retrieveData, saveData } from "../utilities/localData";
 import { userData } from "../interfaces/componentInterfaces";
 
+//React Router
+import { useParams } from 'react-router-dom';
+
 export default function Home() {
 
     const [rateLimitDismissed, setRateLimitModalState] = useState(false)
+    var rawParams = useParams()
 
     /**
      * This function retrieves the user data from local storage and returns it as an object
@@ -45,6 +49,12 @@ export default function Home() {
     }
 
     useEffect(() => {
+        if(rawParams.keyword){
+            let fullUrl = window.location.href
+            let splitUrl = fullUrl.split("/results")
+            window.location.href = splitUrl[0]
+        }
+
         const userData = getuserData()
         if (typeof userData === "object") {
             if (userData.rateLimitDismiss) {

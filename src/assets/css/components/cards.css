@@ -6,14 +6,15 @@
   gap: 0.25em;
   min-width: 8.93em;
   max-width: 11.93em;
-  height: 13.64em;
+  height: 9em;
   background-color: #fff;
   border-radius: 0.5em;
-  transition: height 0.3s ease-in-out;
+  transition: height 0.3s;
 }
 
 .card:hover {
-  height: auto;
+  height: 13.64em;
+  margin: 0em;
 }
 
 .card-group {
@@ -83,11 +84,19 @@
 }
 
 .card:hover .score-visit-links {
-  display: block;
+  opacity: 1;
+  margin: 0em;
+  visibility: visible;
+  height: auto;
 }
 
 .score-visit-links {
-  display: none;
+  opacity: 0;
+  margin:0em;
+  height: 0em;
+  overflow: hidden;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s, height 0.3s;
 }
 
 .profile-link {
