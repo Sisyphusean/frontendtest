@@ -17,7 +17,7 @@ export default function Navbar(props: searchBarProps) {
 
     return (
         <nav className="navbar-container">
-            <img src={smallIcon} alt="app-logo" onClick={goHome} style={{cursor:"pointer"}} />
+            <img className="navbar-icon" src={smallIcon} alt="app-logo" onClick={goHome} style={{cursor:"pointer"}} />
             <SearchBar value={props.value} />
         </nav>
     )

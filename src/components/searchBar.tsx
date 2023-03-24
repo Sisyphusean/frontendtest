@@ -49,7 +49,7 @@ function SearchBar(props: searchBarProps) {
     the useGithubSearchHook to prevent unecessary calls to the Hook and in effect Github's API
     */
     useEffect(() => {
-        if(props.value){
+        if (props.value) {
             methods.setValue(customInputProps.name, props.value)
         }
         if (formSubmitted) {
@@ -80,11 +80,13 @@ function SearchBar(props: searchBarProps) {
 
                 <div className="container-input-button ">
 
-                    <CustomInput name={customInputProps.name}/>
+                    <CustomInput name={customInputProps.name} />
                     <button
                         className="button"
                         type="submit">
-                        Search
+                        <span className="buttonText">
+                            Search
+                        </span>
                         <img src={searchIcon}
                             alt="search-icon"
                             className="button-image"

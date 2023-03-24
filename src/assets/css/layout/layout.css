@@ -1,4 +1,4 @@
-body{
+body {
     margin: 0px;
 }
 
@@ -10,7 +10,7 @@ body{
     justify-content: center;
 }
 
-.input-wrapper{
+.input-wrapper {
     display: flex;
     flex-direction: column;
     gap: 0.5714285714em;
@@ -61,7 +61,7 @@ body{
 
 /** RESULTS LAYOUT **/
 .results-container {
-    width:65%;
+    width: 65%;
     margin: auto;
 }
 

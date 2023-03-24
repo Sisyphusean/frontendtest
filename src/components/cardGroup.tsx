@@ -59,27 +59,29 @@ function Pager(props: {
         <div className="pager-container">
             <div className="pager-number-container">
                 <LeftChevron onClick={() => setCurrentPageHandler(1, "left")} />
-                {pageNumbers.map((pageNumber, index) => {
-                    if (pageNumber === -1) {
-                        return <span key={index}>...</span>;
-                    } else if (pageNumber === currentPage) {
-                        return (
-                            <span className="pager-number pager-number-active" key={index}>
-                                {pageNumber}
-                            </span>
-                        );
-                    } else {
-                        return (
-                            <span
-                                className="pager-number"
-                                key={index}
-                                onClick={() => setCurrentPageHandler(pageNumber, "")}
-                            >
-                                {pageNumber}
-                            </span>
-                        );
-                    }
-                })}
+                <div className='page-numbers'>
+                    {pageNumbers.map((pageNumber, index) => {
+                        if (pageNumber === -1) {
+                            return <span key={index}>...</span>;
+                        } else if (pageNumber === currentPage) {
+                            return (
+                                <span className="pager-number pager-number-active" key={index}>
+                                    {pageNumber}
+                                </span>
+                            );
+                        } else {
+                            return (
+                                <span
+                                    className="pager-number"
+                                    key={index}
+                                    onClick={() => setCurrentPageHandler(pageNumber, "")}
+                                >
+                                    {pageNumber}
+                                </span>
+                            );
+                        }
+                    })}
+                </div>
                 <RightChevron
                     onClick={() => setCurrentPageHandler(limitedLastPage, "right")}
                 />
@@ -104,8 +106,6 @@ export default function Cardgroup(props: any) {
             if (result.isLoading) {
                 setIsFetching(true)
             }
-
-            console.log(result)
 
             if (result.data?.items.length > 0) {
                 setRateLimitingOccuring(false)

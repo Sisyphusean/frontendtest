@@ -92,7 +92,7 @@
 
 .score-visit-links {
   opacity: 0;
-  margin:0em;
+  margin: 0em;
   height: 0em;
   overflow: hidden;
   visibility: hidden;
@@ -128,4 +128,74 @@
 .warning {
   background-color: #fef4ea;
   border: 0.1071428571em solid #F0932B;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+/* MEDIA QUERIES */
+@media only screen and (max-width: 1351px) and (min-width: 768px) {
+  .card-group {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (max-width: 769px) and (min-width: 600px) {
+  .card-group {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .card-group {
+    grid-template-columns: repeat(1, 1fr);
+    padding-right: 2em
+  }
+
+  .input-text-search-long {
+    width: 13em;
+  }
+
+  .page-numbers {
+    display: none;
+  }
+
+  .navbar-icon {
+    width: 3em;
+  }
+
+  .results-page{
+    overflow: hidden;
+  }
+
+  .results-container {
+    width: 100%;
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+
+  .navbar-container {
+    margin-right: 2em;
+  }
+
+  .buttonText {
+    display: none;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+
+  .response-card p{
+    width: 100%;
+  }
+
+  .response-card{
+    width: 18em;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
