@@ -58,7 +58,7 @@ function Pager(props: {
     return (
         <div className="pager-container">
             <div className="pager-number-container">
-                <LeftChevron onClick={() => setCurrentPageHandler(1, "left")} />
+                <LeftChevron onClick={() => setCurrentPageHandler(currentPage===1 ? 0 : currentPage-1, "left")} />
                 <div className='page-numbers'>
                     {pageNumbers.map((pageNumber, index) => {
                         if (pageNumber === -1) {
@@ -82,8 +82,11 @@ function Pager(props: {
                         }
                     })}
                 </div>
+                <div className='mobile-page-indicator'>
+                    {`Showing page ${currentPage} of ${limitedLastPage}`}
+                </div>
                 <RightChevron
-                    onClick={() => setCurrentPageHandler(limitedLastPage, "right")}
+                    onClick={() => setCurrentPageHandler(currentPage===lastPage ? 0 : currentPage+1, "right")}
                 />
             </div>
         </div>
@@ -212,8 +215,8 @@ export default function Cardgroup(props: any) {
                                 <p>
                                     Rate limiting occurs when too many requests are made to an API in a short amount of time. This can
                                     happen when a large number of requests are sent over a short
-                                    period of time. To prevent this from happening,
-                                    please wait a few minutes before making another request.
+                                    period of time. <br></br> <br></br>To prevent this from happening,
+                                    please wait a few minutes before making another search.
                                 </p>
                             </div>
                             : <p style={{ marginTop: "4em" }}>
