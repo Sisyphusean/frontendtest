@@ -213,7 +213,7 @@ export default function Cardgroup(props: any) {
                                     Rate limiting occurs when too many requests are made to an API in a short amount of time. This can
                                     happen when a large number of requests are sent over a short
                                     period of time. To prevent this from happening,
-                                    you can add an API key to your code or wait a few minutes before making another request.
+                                    please wait a few minutes before making another request.
                                 </p>
                             </div>
                             : <p style={{ marginTop: "4em" }}>

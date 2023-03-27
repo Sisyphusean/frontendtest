@@ -7,13 +7,12 @@ import * as DOMPurify from 'dompurify';
 
 //API resources
 import endpoints from "../utilities/endpoints"
-import { GithubSearchResult, fetcherError } from '../interfaces/apiInterfaces';
+import { GithubSearchResult } from '../interfaces/apiInterfaces';
 import { moveStringToBeginning, retrieveData, saveData } from '../utilities/localData';
 import { userData } from '../interfaces/componentInterfaces';
-import { useEffect } from 'react';
 
 /**This is the Github Authorization code. It should be entered to prevent Rate limiting */
-const Auth: string = ""
+const Auth: string = process.env.REACT_APP_GITHUB_TOKEN ? process.env.REACT_APP_GITHUB_TOKEN : ""
 
 const axiosinstance = axios.create({
     baseURL: 'https://api.github.com/search/users?q=',
