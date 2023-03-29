@@ -23,4 +23,4 @@ I used React, Axios, Typescript, React-Router-DOM V6, and Redux. Vanilla CSS was
 After completing the design, I wanted to mainly use `useSWR` to initiate the API calls. This is because SWR has inbuilt caching that would prevent placing unneeded calls to the Github API. After facing some challenges, I opted for Axios. I still believe that the best implementation of this would be completed with SWR.
 
 ## Current State
-This project is functional with some bugs.
+This project is fully functional.
