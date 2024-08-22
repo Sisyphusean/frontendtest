@@ -1,4 +1,4 @@
-# Oze Front end Test
+# Front end Test
 
 ## Table of Contents:
 - [Design](#design)
